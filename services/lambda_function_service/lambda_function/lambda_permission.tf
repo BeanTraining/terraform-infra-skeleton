@@ -34,7 +34,7 @@ resource "aws_lambda_permission" "allow-cloudwatch-to-call-split-lambda" {
   count = var.lambda_schedule_expression != "" ? 1 : 0
   statement_id  = "AllowExecutionFromCloudWatch"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.this.function_name
+  function_name = aws_lambda_function.this[0].function_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.cron_job[0].arn
 }
